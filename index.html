@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Double Submit Cookies</title>
+</head>
+<body onload="SetToken()"> 
+	<h3> Double Submit Cookies Token Pattern </h3>
+	<p><i> Login Page </i></p>
+	<hr>
+	<br>
+<form action = "login.php" method = "POST">
+<table>
+		<tr>
+			<td>
+				<label><b>Username</b></label>
+			</td>
+			<td>
+				<input type = "text" name = "input_username" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label><b>Password</b></label>
+			</td>
+			<td>
+				<input type = "password" name = "input_pass" />
+				<input type = "hidden" name = "input_Token" value="" id="hidden_token"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			</td>
+			<td>
+				<input type="submit" value="Submit">
+			</td>
+		</tr>
+</table>	
+</form>
+    
+<script>
+function SetToken() {
+  var xhttp;
+  
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("hidden_token").setAttribute('value',this.responseText);
+      
+    }
+  };
+  xhttp.open("GET", "csrf.php", true);
+  xhttp.send();   
+}
+</script>
+        
+<br>
+<hr>
+<br>
+    <div style="text-align: center;">
+      Copyright &copy; Tharaka @ 2018 | SLIIT
+    </div>   
+    
+</body>
+</html>
